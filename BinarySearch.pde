@@ -22,18 +22,45 @@ private Item[] store = {new Item(184,14),
 };                             
 public int linearSearch(int catNumToFind)
 {
+    for(int i=0;i<store.length;i++)
+        if(store[i].getCatNum()==catNumToFind)
+            return store[i].getInventory();
+        
+
+    
+
     //complete this method
     return -1;
 }
 public int binarySearch(int catNumToFind)
 {
-    //complete this method    
+    int low =0;
+    int high = store.length-1;
+    while(low<=high)
+    {
+        int guess = (low+high)/2;
+    if(catNumToFind==store[guess].getCatNum())
+        return store[guess].getInventory();
+    else if(catNumToFind>store[guess].getCatNum())
+        low = guess+1;
+    else //if(catNumToFind<store[guess])
+        high = guess-1;
+    }
+  //complete this method    
     return -1;    
 }
 public int binarySearch(int catNumToFind,int nLow, int nHigh)
 {
-    //complete this method    
-    return -1;           
+    int guess = (nLow+nHigh)/2;
+    if(nLow>nHigh)
+        return -1;
+    else if(store[guess].getCatNum()>catNumToFind)
+        return binarySearch(catNumToFind,nLow,guess-1);
+    else  if(store[guess].getCatNum()<catNumToFind)
+        return binarySearch(catNumToFind,guess+1,nHigh);
+    else
+        return store[guess].getInventory();
+    //complete this method             
 }
 public void setup()
 {
